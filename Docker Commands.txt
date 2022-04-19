@@ -1,0 +1,128 @@
+*****************************                                                               ********************************
+*****************************------------------------DOCKER COMMANDS------------------------********************************
+
+docker images   ==============>>  [Lists all docker images on your server]
+
+systemctl enable docker    ==============>>  to start docker on boot automatically.
+
+docker rmi image_name   ==============>>   [To remove the unwanted docker image]
+
+docker search image_name    ==============>>  [For instance docker search apache] == it finds the relevant images in Docker hub.
+
+docker pull image_name    ==============>>  [For instance docker pull debian]
+
+docker ps    ==============>>  [docker process status]
+
+docker kill container_id     ==============>>  kills the container
+
+docker run -it -d -p 8090:80 --restart unless-stopped --name webserver ffnginx      ==============>>  It will run a new Docker container from our image ffnginx on port 8090, it's name is web. The --rm switch removes the container after the command is executed.
+
+docker run -p 127.0.0.1:1234:80 -d -v /var/www/:/usr/share/nginx/html nginx:1.9
+
+docker exec -it container_name /bin/bash      ==============>>  to enter into the container shell
+
+docker build -t ffnginx .       ==============>>  It will build a docker image with tag "nginx"
+
+docker logs -f container_ID       ==============>>  To see the live logs of any container.
+
+docker start container_id       ==============>>  Start the container
+
+docker stop container name       ==============>>  It will stop the container, we can use container_ID OR container_name.
+
+docker inspect container_ID       ==============>>  It will show the full details related to a container.
+
+docker version       ==============>>   Check the docker's version installed.
+
+docker info | more       ==============>>   Gives the general docker information.
+
+docker ps -a       ==============>>    It lists all of the containers on the system.
+
+docker top container_ID       ==============>>    It shows the currently running processes on a container. [For instance, docker top 2224b6da4b2f]
+
+docker rm container_ID       ==============>>    It will delete the container.
+
+docker inspect 5299d0e6d50a | grep -i pid       ==============>>    To get the PID of any running container.
+
+docker run -v /opt/faisal/myabc/docmount:/opt --restart unless-stopped --name mountest ffapache       ==============>>    -v is the actual switch for volume mounting.
+
+docker export container_ID | gzip > web1.gz       ==============>>    It will export the full container in a tar file.
+
+docker tag 7e0aa2d69a15 frehman/webserver:2.0       ==============>>    docker tag image_id repouser/repo:image_tag
+
+docker login       ==============>>    Loging to your repository from SSH terminal.
+
+docker push frehman/webserver:1.1.0       ==============>>    it will push the image with tag 1.1.0 to the public repository frehman/webserver.
+
+docker pull frehman/webserver:1.0       ==============>>    Here, frehman is the username, webserver is a public repository and 1.0 is the image tag. It'll download the image.
+
+docker rm -vf $(docker ps -a -q)       ==============>>    This command removes all the running/stopped containers, once the containers are stopped, you can delete the images.
+
+docker rmi -f $(docker images -a -q)       ==============>>    It will delete all the docker images.
+
+docker system df -v | grep -i image_name       ==============>>    Tells us the details about disk space for any image or a container.
+
+docker system prune        ==============>>    It will remove all the stopped containers, dangling images, kachra aur koora kirkit.
+
+docker cp test.sh f4f570356565:/home         ==============>>    It will copy test.sh in /home of the running container [Provide the container_ID]
+
+docker cp f4f570356565:/home/testscript.sh /opt/         ==============>>    It will copy the script from container's /home to the server's /opt directory.
+
+docker network ls         ==============>>    It will show the network details of our docker network.
+
+docker network create mynewnet          ==============>>    A new network will be created with the name mynewnet.
+
+docker run -it -d --name container1 --network mynewnet image_name         ==============>>    A new container will be created with our new network.
+
+docker inspect container_ID         ==============>>    We can inspect the network details of our container.
+
+docker stats          ==============>>    Shows the status of running containers, just like top command in Linux.
+
+docker container run --rm -it -v /var/run/docker.sock:/var/run/docker.sock --name ucp docker/ucp:2.2.3 uninstall-ucp --interactive          ==============>>    Un-installs UCP.
+
+cat .dd_password.txt | docker login --username frehman --password-stdin
+
+docker login -u faisikhan -p
+
+docker images --no-trunc  ==> The output is not truncated.
+
+docker run -d -p 9000:9000 --name Sandbox_portainer --restart always -v /var/run/docker.sock:/var/run/docker.sock -v /opt/portainer:/data portainer/portainer
+
+curl ifconfig.me
+
+********************************************************************Docker Within Docker********************************************************************
+
+docker run --name faisaldockerindocker -v /var/run/docker.sock:/var/run/docker.sock -it docker
+
+New docker image with name "docker" is pulled and the var/run/docker.sock socket is mounted within the new docker container. It is docker within docker.
+
+========================================
+
+echo "Creating a Dockerfile for Nginx Web Server"
+echo "FROM nginx" > Dockerfile
+docker build -t engine/enginex:0.2 .
+docker run -it -d -p 8099:80 --restart unless-stopped --name web1 engine/enginex:0.2
+
+========================================
+
+npm install -g serve
+serve -s build
+
+openssl pkcs12 -in STAR.AZUBA.COM_CHAIN.pfx -nocerts -out azuba.key
+openssl pkcs12 -in STAR.AZUBA.COM_CHAIN.pfx -clcerts -nokeys -out azuba_root.crt
+
+openssl pkcs12 -in STAR.AZUBA.COM_CHAIN_intermediate certs.pem -clcerts -nokeys -out azuba_new.crt
+
+------------------------********************************ANSIBLE COMMANDS********************************------------------------
+------------------------********************************ANSIBLE COMMANDS********************************------------------------
+
+ansible-playbook -i ./hosts playbook.yml
+
+ansible-playbook  --user frehman playbook.yml
+
+If your .aws credentials are placed other then /home/users/frehman/.aws [It is the default location of AWS credentials]
+
+export AWS_CONFIG_FILE=/home/frehman/.aws/config
+export AWS_SHARED_CREDENTIALS_FILE=/home/frehman/.aws/credentials
+
+------------------------****************************************************************------------------------
+------------------------****************************************************************------------------------
